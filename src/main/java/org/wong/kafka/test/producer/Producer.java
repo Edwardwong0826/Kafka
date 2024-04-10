@@ -20,10 +20,14 @@ public class Producer {
         KafkaProducer<String, String> producer = new KafkaProducer<>(configMap);
 
         // generate record
-        ProducerRecord<String, String> record = new ProducerRecord("test","key", "value");
+        //ProducerRecord<String, String> record = new ProducerRecord("test","key", "value");
 
+        for(int i =1; i <10; i++){
+            ProducerRecord<String, String> record = new ProducerRecord("test","key"+i, "value"+i);
+            producer.send(record);
+        }
         // use producer object send data to kafka
-        producer.send(record);
+
         // close producer object
         producer.close();
     }
