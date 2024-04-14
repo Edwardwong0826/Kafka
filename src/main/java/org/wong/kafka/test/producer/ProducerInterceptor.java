@@ -23,10 +23,9 @@ public class ProducerInterceptor {
         // create producer object
         KafkaProducer<String, String> producer = new KafkaProducer<>(configMap);
 
-        // generate record
-        //ProducerRecord<String, String> record = new ProducerRecord("test","key", "value");
 
         for(int i =1; i <10; i++){
+
             // other than these parameters, we can also put partition parameter
             // once the data is constructed and send, we can only use and cannot modify the value anymore
             ProducerRecord<String, String> record = new ProducerRecord("test1","key"+i, "value"+i);
@@ -36,10 +35,10 @@ public class ProducerInterceptor {
             // by default kafka do have its own interceptor
             producer.send(record);
         }
-        // use producer object send data to kafka
 
         // close producer object
         producer.close();
+
     }
 
 }
