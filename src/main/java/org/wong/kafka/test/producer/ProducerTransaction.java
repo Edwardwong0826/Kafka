@@ -55,7 +55,7 @@ public class ProducerTransaction {
 
             for (int i = 1; i < 10; i++) {
 
-                ProducerRecord<String, String> record = new ProducerRecord("test", "key" + i, "value" + i);
+                ProducerRecord<String, String> record = new ProducerRecord("test3", "key" + i, "value" + i);
 
                 final Future<RecordMetadata> send = producer.send(record);
 

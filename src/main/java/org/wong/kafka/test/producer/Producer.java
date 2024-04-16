@@ -9,9 +9,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Producer {
+
     public static void main(String[] args) {
 
+        // every kafka topic have 1 to many paritions, means data will split to different parition
+        // every partition have 1 to many replicas
+        // each kafka broker only can store one partition replica
 
+        // kafka topic is a logical concepts, only partition is physical concepts and got it own physical folder
+        // all partition managed by the Kafka Replica Manager component
+        // in this directory C:\Kafka\cluster\broker-1\data we can see got test-1, test3-0 folder, which is represent topic-partition format
+        // https://docs.confluent.io/platform/current/installation/configuration/topic-configs.html
 
         Map<String, Object> configMap = new HashMap<>();
         configMap.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
@@ -28,17 +36,18 @@ public class Producer {
             // other than these parameters, we can also put partition parameter
             // once the data is constructed and send, we can only use and cannot modify the value anymore
             // if we specify the partition, the producer will straight send without validate, so if we send to a non exist partition number it will be stuck
-            ProducerRecord<String, String> record = new ProducerRecord("test",1,"key"+i, "value"+i);
+            ProducerRecord<String, String> record = new ProducerRecord("test","key"+i, "value"+i);
+            //ProducerRecord<String, String> record = new ProducerRecord("test", 1,"key"+i, "value"+i);
 
             // we can config or add interceptors before producer data send to validate or do transformation
             // we can add multiple interceptors, and they work in sequence, one if any of the interceptor error does not affect the data send
             // by default kafka do have its own interceptor
             producer.send(record);
         }
-        // use producer object send data to kafka
 
         // close producer object
         producer.close();
     }
+
 }
 
