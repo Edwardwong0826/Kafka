@@ -29,5 +29,17 @@ public class Test {
 
         // the log segments file actually name by the offset value, means different log segment file start at different offset
         // log segments file actually consist of 3 file which .index file, .log file and .timeindex file as one complete log segment
+
+        // for Kafka data storage data synchronize consistency problem
+        // basically there is watermark level (consider as virtual offset) across all partitions, consumer can only pull data within watermark,
+        // those above watermark consumer cannot see it , the watermark level only increases after the fhe follower completed replicas and store the data,
+        // and if leader broker is down, it will be elected other broker with the data within watermark level only,
+        // those above watermark data will be discarded to ensure synchronize is consistency
+
+        // there will be LOE -Log End Offset , HW - High Water status in each broker, and leader broker will contain other follow broker LEO as well
+        // please refer to kafka folder image for more flows info
+
+        // for ISR status, if the broker out of connect like 15 seconds, the ISR list will remove that broker server
+        // ISR status can use to elect the new broker leader if the leader out of connect
     }
 }
