@@ -13,6 +13,8 @@ import java.util.Map;
 public class MyKafkaPartitioner implements Partitioner {
     @Override
     public int partition(String topic, Object key, byte[] keyBytes, Object value, byte[] valueBytes, Cluster cluster) {
+        // this method is to specify how we send the record to the partition
+        // this means we override it which is always send to partition 0 only
         return 0;
     }
 

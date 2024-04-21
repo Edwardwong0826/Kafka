@@ -19,7 +19,11 @@ public class ProducerPartitioner {
 
         // add custom partitioner class
         // we can specify how do we send data to partition according the method we define in our custom partitioner class
-        configMap.put(ProducerConfig.PARTITIONER_CLASS_CONFIG, MyKafkaPartitioner.class.getName());
+        // if we want to use the default kafka server to auto calculate the partition for insert the record, no need to put PARTITIONER_CLASS_CONFIG and override the method
+        //configMap.put(ProducerConfig.PARTITIONER_CLASS_CONFIG, MyKafkaPartitioner.class.getName());
+
+        // remember we need to create topic with the multiple partition first in kafka tools example 3 partition
+        // then run this producer class will split the record to the partition
 
         // create producer object
         KafkaProducer<String, String> producer = new KafkaProducer<>(configMap);
@@ -32,7 +36,7 @@ public class ProducerPartitioner {
             // the key in ProducerRecord is not the key during consume from consumer, its 核心作用就是用来做分区计算
             // if don't have custom partition class and didn't pass in any partition parameter, then it will use the producer record key with algorithm calculate the partition to send
             // kafka in record accumulator class no matter how it will append the partition number according current topic partitioner node load situation to dynamic get partition number if unknown partition detected
-            ProducerRecord<String, String> record = new ProducerRecord("test","key"+i, "value"+i);
+            ProducerRecord<String, String> record = new ProducerRecord("test2","key"+i, "value"+i);
 
             producer.send(record);
         }
