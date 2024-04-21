@@ -4,15 +4,14 @@ import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
-import org.apache.kafka.common.TopicPartition;
 import org.apache.kafka.common.serialization.StringDeserializer;
-import org.apache.kafka.common.serialization.StringSerializer;
 
 import java.time.Duration;
-import java.util.*;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
-public class Consumer {
-
+public class ConsumerGroup3 {
     public static void main(String[] args) {
 
         // in Kafka, each topic will split to multiple partition, and each partition can only be consumed by one consumer group inside one consumer only
@@ -43,7 +42,7 @@ public class Consumer {
             ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(100));
 
             for(ConsumerRecord<String,String> record : records){
-                System.out.println(record);
+                System.out.println(record.partition());
             }
         }
 
