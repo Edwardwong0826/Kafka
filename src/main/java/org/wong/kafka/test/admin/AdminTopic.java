@@ -18,6 +18,14 @@ public class AdminTopic {
         // once know which broker is controller broker, send another request to that broker example 9091 socket server -> kafka APIs ->  ZKClient send request to ZooKeeper to create topics under /brokers/topics
         // finally there is partition state machine and replica state machine in controller broker will listen to Zookeeper /brokers/topics to create the necessary partitions and replicas and sent the result to other brokers
         // others broker will use replicaManager to create the replicas, why is so complicated is because kafka using producer and consumer model and there is many primary keys, so using this way to decouple
+
+        // there might be the problem called cluster brain split problem
+        // this problem is solved by epoch value, zookeeper will update epoch value when there is new controller get elect
+        // so other broker can know who is the latest controller and sync with the correct controller
+
+        // Kafka in linux use zero copy to increases the performance for transfer the data between broker
+        // so in linux kernel mode it will read data stored in page cache and convert to buffer cache directly to broker server
+        // because kafka broker application does not involve the transfer so the transfer performance will become higher
         Map<String,Object> configMap = new HashMap<>();
         configMap.put(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
 
