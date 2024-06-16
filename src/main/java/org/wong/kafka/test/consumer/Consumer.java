@@ -22,7 +22,7 @@ public class Consumer {
         // if consumer 1 and 2 is down, then consumer 0 will eventually consume from partition 0, 1, 2 simultaneously
 
         // consumer partition assign strategy
-        // every consumer group got leader and follower, the leader is the first consume that join the group, and leader will decide consumer consume which from topic partition
+        // every consumer group got leader and follower, the leader is the first consumer that join the group, and leader will decide consumer consume which from topic partition
         // same group consumer subscribe to one same topic, so consumer group consumer can concurrent consume all data from topic
         // in order to avoid data repeat consume, every topic each partition only will allow consumed by one of the consumer of the consumer group only
         // means no two consumer or more consumer simultaneously consume data from same one partition data, instead one consumer allow to consume data from different partition

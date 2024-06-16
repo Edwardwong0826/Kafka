@@ -17,6 +17,14 @@ public class ProducerIdempotence {
         // acks -1 or all is third level : priority to ensure reliable, but performance not high, broker leader and follower fully sync and replica store (not all partition follower replica, only ISR list replica) only will respond and acknowledge
         // for acks -1 or all, kafka producer actually will not wait all follower replica finish store because some of the replica maybe cannot perform action due to out of resource or network problem sync very long time or unable so just sync ISR list replica
 
+        // data transfer semantics 数据传输语义
+        // at most once - only send one, don't care is it receive - ACKS level 0
+        // at least once - retry to send until receive, possible of duplicate data issue - ACKS level 1
+        // exactly once - data only receive one time, will not lose and not repeat - idempotence + transaction + ACKS level -1
+
+        // Message Delivery Guarantees for Producer delivery and Consumer receipt
+        // https://docs.confluent.io/kafka/design/delivery-semantics.html - check kafka confluent for semantic guarantees Apache Kafka® provides between the broker and producers and consumers
+
         // kafka will retry to send data to leader if the leader not send back acks acknowledgement long time
         // it keep retry until successfully, we can set the retry times
         // retry may cause data duplicate issue and the data sequence disorder

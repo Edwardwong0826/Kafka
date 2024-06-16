@@ -40,6 +40,10 @@ public class ConsumerGroup3 {
         //    try to keep consumer original consume partition not change or less change
         // 4. CooperativeStickyAssignor strategy - optimized StickyAssignor process of redistribution  with using cooperative protocol, this is more high performance to StickyAssignor
 
+
+        // Message Delivery Guarantees for Producer delivery and Consumer receipt
+        // https://docs.confluent.io/kafka/design/delivery-semantics.html - check kafka confluent for semantic guarantees Apache Kafka® provides between the broker and producers and consumers
+
         Map<String, Object> configMap = new HashMap<>();
         configMap.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
         configMap.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());

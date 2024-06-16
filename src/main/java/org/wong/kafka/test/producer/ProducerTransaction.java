@@ -37,7 +37,11 @@ public class ProducerTransaction {
         // data transfer semantics 数据传输语义
         // at most once - only send one, don't care is it receive - ACKS level 0
         // at least once - retry to send until receive, possible of duplicate data issue - ACKS level 1
-        // exactly once - data only receive one time, will not lose and not repeat - idempotence + transcation + ACKS level -1
+        // exactly once - data only receive one time, will not lose and not repeat - idempotence + transaction + ACKS level -1
+
+        // Message Delivery Guarantees for Producer delivery and Consumer receipt
+        // https://docs.confluent.io/kafka/design/delivery-semantics.html - check kafka confluent for semantic guarantees Apache Kafka® provides between the broker and producers and consumers
+
         configMap.put(ProducerConfig.TRANSACTIONAL_ID_CONFIG, "my-tx-id");
 
         // create producer object
