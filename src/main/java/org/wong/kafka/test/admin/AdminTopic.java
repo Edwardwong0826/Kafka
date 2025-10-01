@@ -13,6 +13,11 @@ import java.util.Map;
 public class AdminTopic {
     public static void main(String[] args){
 
+        // In Kafka, producers are clients that publish or write data to topics, consumers are clients that subscribe to and read data from topics,
+        // and brokers are servers that form a Kafka cluster, responsible for receiving messages from producers, storing them, and serving them to consumers.
+        // Producers and consumers are separate applications or services, while brokers are the central storage and distribution infrastructure that keeps messages persistent
+        // on disk and ensures their availability and replication.
+
         // only the controller broker can create topic etc
         // we cannot ensure which one is the controller broker, so admin object sent request to broker 9092 socket server -> kafka APIs and get cluster info from Metadata and return cluster info as response to admin
         // once know which broker is controller broker, send another request to that broker example 9091 socket server -> kafka APIs ->  ZKClient send request to ZooKeeper to create topics under /brokers/topics

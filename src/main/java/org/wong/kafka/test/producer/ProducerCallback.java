@@ -41,6 +41,10 @@ public class ProducerCallback {
             // at least once - retry to send until receive, possible of duplicate data issue - ACKS level 1
             // exactly once - data only receive one time, will not lose and not repeat - idempotence + transaction + ACKS level -1
 
+            // Kafka supports exactly-once delivery in Kafka Streams and uses transactional producers and consumers to provide exactly-once delivery when transferring and processing data between Kafka topics.
+            // To enable exactly-once delivery for other consumer and producer systems, you can use the automatic offset management that Kafka Connect API offers.
+            // Otherwise, by default Kafka guarantees at-least-once delivery. You can implement at-most-once delivery by disabling retries on the producer and committing offsets in the consumer before processing a batch of messages.
+
             // Message Delivery Guarantees for Producer delivery and Consumer receipt
             // https://docs.confluent.io/kafka/design/delivery-semantics.html - check kafka confluent for semantic guarantees Apache Kafka® provides between the broker and producers and consumers
 
