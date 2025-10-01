@@ -15,6 +15,7 @@ public class Consumer {
         // in Kafka, each topic will split to multiple partition, and each partition can only be consumed by one consumer group inside one consumer only
         // example there is 3 producer, one topic with 3 partition (0,1,2), and consumer group with 3 consumer (0,1,2)
         // multiple producer is allowed to produce to one topic multiple partition, but one consumer group inside example consumer no 1 and consumer no 2 cannot consume from same partition 0
+        // example there is two consumer groups 1 and 2 (0,1,2), two consumer 0 from groups 1 and groups 2 can consume from topic same partition (0,1,2) let said 0
         // is ok that consumer group to have more consumer than topic partition, if one of the consumer is down, the idle consumer can act as backup to consume
         // kafka server will store group consumer offset into internal topic called _consumer_offsets, _consumer_offsets inside also split into 50 partitions
         // so same group backup consumer can continue consumed back from last time same group down consumer offset

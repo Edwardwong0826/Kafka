@@ -14,6 +14,7 @@ public class ConsumerGroup3 {
         // in Kafka, each topic will split to multiple partition, and each partition can only be consumed by one consumer group inside one consumer only
         // example there is 3 producer, one topic with 3 partition (0,1,2), and consumer group with 3 consumer (0,1,2)
         // multiple producer is allowed to produce to one topic multiple partition, but one consumer group inside example consumer no 1 and consumer no 2 cannot consume from same partition 0
+        // example there is two consumer groups 1 and 2 (0,1,2), two consumer 0 from groups 1 and groups 2 can consume from topic same partition (0,1,2) let said 0
         // is ok that consumer group to have more consumer than topic partition, if one of the consumer is down, the idle consumer can act as backup to consume
         // kafka server will store group consumer offset into internal topic called _consumer_offsets, _consumer_offsets inside also split into 50 partitions
         // so same group backup consumer can continue consumed back from last time same group down consumer offset
@@ -33,7 +34,7 @@ public class ConsumerGroup3 {
         // above process will repeat when there is new consumer join the same consumer group
 
         // there is common of four Kafka provided partition assign strategy, kafka default choose to use RangeAssignor and CooperativeStickyAssignor
-        // 1. RoundRobinAssignor strategy -Round robin topic partition to subscribe consumer, non subscribe consumer will be skipped
+        // 1. RoundRobinAssignor strategy - Round robin topic partition to subscribe consumer, non subscribe consumer will be skipped
         // 2. RangeAssignor strategy - according each topic partition number to calculate and assign, try to allocate average the partition to consumer as possible,
         //    when cannot allocate average, then fill in the head sequentially
         // 3. StickyAssignor strategy - after first assign, every consumer keep the assign partition information, if there is consumer leave and join, then redistribution

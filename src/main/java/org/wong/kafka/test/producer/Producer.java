@@ -36,7 +36,7 @@ public class Producer {
             // other than these parameters, we can also put partition parameter
             // once the data is constructed and send, we can only use and cannot modify the value anymore
             // if we specify the partition, the producer will straight send without validate, so if we send to a non exist partition number it will be stuck
-            ProducerRecord<String, String> record = new ProducerRecord("test","key"+i, "value"+i);
+            ProducerRecord<String, String> record = new ProducerRecord<>("test","key"+i, "value"+i);
             //ProducerRecord<String, String> record = new ProducerRecord("test", 1,"key"+i, "value"+i); // specify send to which partition number
             //ProducerRecord<String, String> record = new ProducerRecord("test", i%3,"key"+i, "value"+i); // use mod to random assign partition
 
